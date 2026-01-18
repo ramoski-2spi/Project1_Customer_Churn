@@ -18,7 +18,17 @@ Predict customers likely to churn so the business can improve retention.
 For this project, I used the Telco Customer Chrun dataset.
 
 # Exploratory Data Analysis
-EDA showed that ...
+EDA showed the following key insights:
+
+- The dataset is imbalanced, with significantly more non-churned customers than churned customers, which is an important consideration for model evaluation.
+
+- Although no missing values were initially detected, converting the TotalCharges column to a numeric format revealed hidden missing values, highlighting the importance of proper data type validation during preprocessing.
+
+- Customers on month-to-month contracts exhibit a substantially higher churn rate compared to customers on longer-term contracts.
+
+- Churned customers tend to have higher monthly charges, suggesting that pricing or perceived value may play a role in customer churn.
+
+- Customers with shorter tenure are more likely to churn, indicating that early-stage retention is critical.
 
 # Problem Approach
 
