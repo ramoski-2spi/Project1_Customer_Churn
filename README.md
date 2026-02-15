@@ -81,10 +81,10 @@ Despite its simplicity, **Logistic Regression performed best** on Recall and F1-
 
 | Metric | Score |
 |------|------|
-| Recall (Churn) | ~0.93 |
-| Precision (Churn) | ~0.41 |
-| F1-Score | ~0.58 |
-| ROC-AUC | ~0.84 |
+| Recall (Churn) | 0.91 |
+| Precision (Churn) | 0.45 |
+| F1-Score | 0.60 |
+| ROC-AUC | 0.84 |
 
 ### Interpretation
 - High recall ensures most churners are detected
