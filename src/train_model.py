@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import joblib
 
 def train_logistic(X_train, y_train):
-    model = LogisticRegression(class_weight= 'balanced', max_iter= 2000)
+    model = LogisticRegression(class_weight= 'balanced', max_iter= 5000)
     model.fit(X_train, y_train)
     
     joblib.dump(model, 'models/Logistic_model.pkl')
