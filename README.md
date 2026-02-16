@@ -97,6 +97,7 @@ Despite its simplicity, **Logistic Regression performed best** on Recall and F1-
 This project includes automation scripts to ensure reproducibility:
 
 - Model training pipeline
+- Model preprocessing
 - Model evaluation
 - Model persistence (scaler and model saving)
 - Prediction script for new customer data
@@ -104,3 +105,27 @@ This project includes automation scripts to ensure reproducibility:
 Run the full pipeline:
 ```bash
 python run_pipeline.py
+```
+
+---
+
+## Making Predictions on New Customers
+The project includes a dedicated prediction script that allows you to score individual customers:
+
+How It Works:
+Loads the trained model and saved scaler
+
+Takes raw customer data as input (you will have to input the data yourself)
+
+Automatically scales numerical features using the saved scaler
+
+Applies the optimized threshold (0.35) to convert probabilities to predictions
+
+Get the prediction by running:
+```bash
+python predict.py
+```
+Example of output:
+```bash
+Churn Prediction: YES
+Churn Probability: 78.3%
