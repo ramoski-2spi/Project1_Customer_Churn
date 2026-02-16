@@ -1,39 +1,106 @@
-# Project: Customer Churn Prediction
-This project analyzes customer data and builds a machine learning model to predict customer churn.
+# Customer Churn Prediction – Machine Learning Project
 
-# Tech Stack
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib / Seaborn
+## Project Overview
+This project builds an end-to-end machine learning pipeline to predict customer churn for a subscription-based business.  
+The focus is on **business-driven modeling**, **automation**, and **model interpretability**, rather than chasing unrealistic accuracy scores.
 
-# Business Problem
-Customer churn is a common challenge for subscription-based and service-oriented businesses, leading to significant revenue loss and higher marketing costs to replace lost customers. This project tackles the problem by using data-driven models to predict which customers are most likely to leave, empowering companies to intervene early with targeted retention strategies—turning reactive loss into proactive retention.
+The project follows a real-world data science workflow:
+- Data exploration and cleaning
+- Feature engineering
+- Model training and evaluation
+- Hyperparameter and threshold tuning
+- Automated training and prediction scripts
 
-# Project Goal:
-Predict customers likely to churn so the business can improve retention.
+---
 
-# Dataset
-For this project, I used the Telco Customer Chrun dataset.
+## Business Problem
+Customer churn is costly. Retaining an existing customer is significantly cheaper than acquiring a new one.
 
-# Exploratory Data Analysis
-EDA showed the following key insights:
+**Objective:**  
+Identify customers likely to churn so the business can take preventive actions.
 
-- The dataset is imbalanced, with significantly more non-churned customers than churned customers, which is an important consideration for model evaluation.
+**Key Modeling Priority:**  
+- **Recall for churned customers**, because missing a churner is more costly than a false positive.
 
-- Although no missing values were initially detected, converting the TotalCharges column to a numeric format revealed hidden missing values, highlighting the importance of proper data type validation during preprocessing.
+---
 
-- Customers on month-to-month contracts exhibit a substantially higher churn rate compared to customers on longer-term contracts.
+## Dataset
+- Telecom customer data
+- Mix of numerical and categorical features
+- Target variable: `Churn` (Yes / No)
 
-- Churned customers tend to have higher monthly charges, suggesting that pricing or perceived value may play a role in customer churn.
+### Data Quality Notes
+- No missing values were initially detected
+- After converting `TotalCharges` to numeric, missing values appeared due to invalid string entries
+- These rows were handled during data cleaning
 
-- Customers with shorter tenure are more likely to churn, indicating that early-stage retention is critical.
+---
 
-# Problem Approach
+## Exploratory Data Analysis (EDA) – Key Insights
+- Strong class imbalance (more non-churners than churners)
+- Customers on **month-to-month contracts churn significantly more**
+- Customers with **short tenure** are more likely to churn
+- Churned customers tend to have **higher monthly charges**
 
-# Results
+These insights guided model choice and evaluation strategy.
 
-# Recommendations
+---
 
-# Next Steps
+## Feature Engineering
+- One-hot encoding for categorical variables
+- Numerical feature scaling using `StandardScaler`
+- Tenure grouped into buckets to capture lifecycle effects
+
+> Feature selection and correlation removal were intentionally excluded in the final pipeline, as:
+> - Tree-based models are robust to correlated features
+> - Logistic Regression performance indicated multicollinearity was not harmful
+
+---
+
+## Models Trained
+The following models were trained and compared:
+
+- Logistic Regression
+- Random Forest
+- Gradient Boosting
+
+Despite its simplicity, **Logistic Regression performed best** on Recall and F1-score, which aligns with the business objective.
+
+---
+
+## Hyperparameter & Threshold Tuning
+- `GridSearchCV` was used to tune Logistic Regression
+- Optimization focused on **Recall** and **F1-score**
+- Decision threshold tuning was applied to improve churn detection
+
+---
+
+## Final Model Performance
+**Selected Model:** Tuned Logistic Regression  
+**Decision Threshold:** Optimized for Recall
+
+| Metric | Score |
+|------|------|
+| Recall (Churn) | 0.91 |
+| Precision (Churn) | 0.45 |
+| F1-Score | 0.60 |
+| ROC-AUC | 0.84 |
+
+### Interpretation
+- High recall ensures most churners are detected
+- Lower precision is acceptable given the business context
+- Performance is realistic and comparable to industry churn models
+
+---
+
+## Automation
+This project includes automation scripts to ensure reproducibility:
+
+- Model training pipeline
+- Model evaluation
+- Model persistence (scaler and model saving)
+- Prediction script for new customer data
+
+Run the full pipeline:
+```bash
+python run_pipeline.py
